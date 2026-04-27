@@ -1,13 +1,13 @@
 <template>
   <div class="fishing-table-container">
     <h2>Таблиця риболовлі</h2>
-    
+
     <div class="button-container">
       <Button label="Додати запис" icon="pi pi-plus" @click="openAddDialog" />
     </div>
 
-    <DataTable 
-      :value="fishingData" 
+    <DataTable
+      :value="fishingData"
       tableStyle="min-width: 50rem"
       class="p-datatable-sm"
     >
@@ -18,7 +18,7 @@
           </div>
         </template>
       </Column>
-      
+
       <Column header="Дистанція" style="width: 12%">
         <template #body="slotProps">
           <div class="cell-items">
@@ -26,7 +26,7 @@
           </div>
         </template>
       </Column>
-      
+
       <Column header="Насадка" style="width: 15%">
         <template #body="slotProps">
           <div class="cell-items">
@@ -34,7 +34,7 @@
           </div>
         </template>
       </Column>
-      
+
       <Column header="Година закиду" style="width: 15%">
         <template #body="slotProps">
           <div class="cell-items">
@@ -42,7 +42,7 @@
           </div>
         </template>
       </Column>
-      
+
       <Column header="Година поклівки" style="width: 15%">
         <template #body="slotProps">
           <div class="cell-items">
@@ -50,7 +50,7 @@
           </div>
         </template>
       </Column>
-      
+
       <Column header="Примітки" style="width: 20%">
         <template #body="slotProps">
           <div class="cell-items">
@@ -61,27 +61,27 @@
 
       <Column header="Дії" style="width: 11%">
         <template #body="slotProps">
-          <Button 
-            icon="pi pi-pencil" 
-            severity="info" 
-            text 
-            rounded 
-            @click="openEditDialog(slotProps.data, slotProps.index)" 
+          <Button
+            icon="pi pi-pencil"
+            severity="info"
+            text
+            rounded
+            @click="openEditDialog(slotProps.data, slotProps.index)"
           />
-          <Button 
-            icon="pi pi-trash" 
-            severity="danger" 
-            text 
-            rounded 
-            @click="deleteRow(slotProps.index)" 
+          <Button
+            icon="pi pi-trash"
+            severity="danger"
+            text
+            rounded
+            @click="deleteRow(slotProps.index)"
           />
         </template>
       </Column>
     </DataTable>
 
-    <Dialog 
-      v-model:visible="dialogVisible" 
-      :header="dialogMode === 'add' ? 'Додати запис' : 'Редагувати запис'" 
+    <Dialog
+      v-model:visible="dialogVisible"
+      :header="dialogMode === 'add' ? 'Додати запис' : 'Редагувати запис'"
       :modal="true"
       :style="{ width: '800px' }"
     >
@@ -229,14 +229,16 @@ const openEditDialog = (data, index) => {
 
 const saveRow = () => {
   if (dialogMode.value === 'add') {
-    fishingData.value.push({
-      rodNumbers: [...editedRow.value.rodNumbers],
-      distances: [...editedRow.value.distances],
-      baits: [...editedRow.value.baits],
-      castTimes: [...editedRow.value.castTimes],
-      biteTimes: [...editedRow.value.biteTimes],
-      notes: [...editedRow.value.notes]
-    });
+    fishingData.value = [
+      {
+        rodNumbers: [...editedRow.value.rodNumbers],
+        distances: [...editedRow.value.distances],
+        baits: [...editedRow.value.baits],
+        castTimes: [...editedRow.value.castTimes],
+        biteTimes: [...editedRow.value.biteTimes],
+        notes: [...editedRow.value.notes]
+      }
+          ,...fishingData]
   } else {
     fishingData.value[editedIndex.value] = {
       rodNumbers: [...editedRow.value.rodNumbers],
