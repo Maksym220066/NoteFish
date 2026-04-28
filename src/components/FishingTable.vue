@@ -237,8 +237,8 @@ const saveRow = () => {
         castTimes: [...editedRow.value.castTimes],
         biteTimes: [...editedRow.value.biteTimes],
         notes: [...editedRow.value.notes]
-      }
-          ,...fishingData]
+      },
+      ...fishingData.value]
   } else {
     fishingData.value[editedIndex.value] = {
       rodNumbers: [...editedRow.value.rodNumbers],
